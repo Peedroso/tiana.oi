@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aniversário da Yasmim</title>
+<meta name="theme-color" content="#2f5d46">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div id="petals" aria-hidden="true"></div>
+
+<section class="hero">
+  <div class="leaf leaf-tl"></div><div class="leaf leaf-br"></div>
+  <p class="welcome reveal">Olá, {{ guest }}! 💚</p>
+  <p class="eyebrow reveal">Você está convidado(a) para o</p>
+  <p class="script reveal d1">Aniversário da</p>
+  <h1 class="name reveal d2">Yasmim</h1>
+  <div class="divider reveal d3"><span></span>🌿<span></span></div>
+  <p class="date-big reveal d3">20 · 02 · 2027</p>
+  <p class="badge reveal d3">{{ ev.badge }} · {{ ev.horario }}</p>
+  <a href="#info" class="scroll reveal d4" aria-label="Rolar para baixo">Role para ver os detalhes<i></i></a>
+</section>
+
+<section id="info" class="info">
+  <h2 class="title reveal">🎂 Aniversário da Yasmim</h2>
+  <div class="cards">
+    <article class="card reveal">
+      <div class="ico">📅</div><h3>Data</h3><p>20/02/2027</p>
+    </article>
+    <article class="card reveal d1">
+      <div class="ico">🕑</div><h3>Horário</h3><p>{{ ev.horario }}</p>{% if ev.nota %}<small class="note">{{ ev.nota }}</small>{% endif %}
+    </article>
+    <article class="card reveal d2">
+      <div class="ico">📍</div><h3>Local</h3><p>Rua dos Marmelos, 60,<br>Portal dos Ipês 3, Cajamar</p>
+      <a class="btn small" href="#local">Ver no mapa</a>
+    </article>
+  </div>
+
+  <div class="countdown reveal" id="countdown" data-start="{{ ev.inicio }}">
+    <div><b id="cd-d">00</b><span>dias</span></div>
+    <div><b id="cd-h">00</b><span>horas</span></div>
+    <div><b id="cd-m">00</b><span>min</span></div>
+    <div><b id="cd-s">00</b><span>seg</span></div>
+  </div>
+</section>
+
+<section class="rsvp" id="rsvp">
+  <h2 class="title reveal">Confirme sua presença</h2>
+  <p class="sub reveal">Sua presença vai deixar esse dia ainda mais especial 💚</p>
+  <form id="rsvp-form" class="form reveal" novalidate>
+    <label>Seu nome<input type="text" name="name" placeholder="Nome completo" required maxlength="80" value="{{ guest }}"></label>
+    <div class="choice">
+      <label><input type="radio" name="status" value="sim" checked><span>Sim, estarei lá!</span></label>
+      <label><input type="radio" name="status" value="nao"><span>Não poderei ir</span></label>
+    </div>
+    <label id="guests-wrap">Quantas pessoas (contando com você)?
+      <input type="number" name="guests" min="1" max="10" value="1"></label>
+    <label>Recado para a Yasmim (opcional)<textarea name="message" rows="3" maxlength="300" placeholder="Deixe um carinho..."></textarea></label>
+    <button class="btn" type="submit">Confirmar</button>
+    <p class="feedback" id="rsvp-msg" role="status"></p>
+  </form>
+</section>
+
+<section class="location" id="local">
+  <h2 class="title reveal">📍 Localização</h2>
+  <p class="sub reveal">Rua dos Marmelos, 60<br>Portal dos Ipês 3, Cajamar</p>
+  <div class="map-box reveal">
+    <iframe title="Mapa do local da festa" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=Rua+dos+Marmelos+60+Portal+dos+Ip%C3%AAs+3+Cajamar&output=embed"></iframe>
+  </div>
+  <div class="map-actions reveal">
+    <a class="btn shine" target="_blank" rel="noopener"
+       href="https://www.google.com/maps/search/?api=1&query=Rua+dos+Marmelos+60+Portal+dos+Ip%C3%AAs+3+Cajamar">Abrir no Google Maps</a>
+    <a class="btn ghost" target="_blank" rel="noopener"
+       href="https://waze.com/ul?q=Rua%20dos%20Marmelos%2060%20Portal%20dos%20Ip%C3%AAs%203%20Cajamar&navigate=yes">Abrir no Waze</a>
+    <button class="btn ghost" type="button" id="copy-addr">Copiar endereço</button>
+  </div>
+  <p class="feedback" id="copy-msg" role="status"></p>
+</section>
+
+<section class="gifts" id="gifts">
+  <h2 class="title reveal">Presente? Não precisa! 🎀</h2>
+  <p class="sub reveal">Sua presença é o meu maior presente 💚<br>Mas, se quiser me mimar, aqui vão algumas ideias:</p>
+  <div class="chips reveal">
+    <span>🌸 Perfume</span><span>✨ Body splash</span><span>🎁 Vale-presente</span>
+    <span>📖 Livro</span><span>💍 Acessórios</span><span>💄 Maquiagem</span><span>🧴 Creme corporal</span>
+  </div>
+</section>
+
+<footer>
+  <p class="script">Yasmim</p>
+  <p>20/02/2027 · {{ ev.horario }}</p>
+  <p>Rua dos Marmelos, 60, Portal dos Ipês 3, Cajamar</p>
+  <p class="small">Com carinho, te esperamos! 💚</p>
+  <a class="logout" href="{{ url_for('sair') }}">Sair</a>
+</footer>
+
+<script src="{{ url_for('static', filename='petals.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

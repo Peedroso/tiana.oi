@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrar · Aniversário da Yasmim</title>
+<meta name="theme-color" content="#2f5d46">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="login-body">
+<div id="petals" aria-hidden="true"></div>
+<div class="leaf leaf-tl"></div><div class="leaf leaf-br"></div>
+
+<main class="login-wrap">
+  <div class="login-card">
+    <div class="bow">🎀</div>
+    <p class="eyebrow">Você foi convidado(a) para o</p>
+    <p class="script lg-script">Aniversário da</p>
+    <h1 class="name lg-name">Yasmim</h1>
+    <div class="divider"><span></span>🌿<span></span></div>
+    <p class="lg-text">Seu convite está esperando por você ✨<br>Entre com seu nome e o código do convite.</p>
+
+    <form method="post" class="login-form" autocomplete="off">
+      <label class="field">
+        <span>Seu nome</span>
+        <input type="text" name="name" placeholder="Como você se chama?" maxlength="60" value="{{ name or '' }}" required>
+      </label>
+      <label class="field">
+        <span>Código do convite</span>
+        <input type="text" name="code" placeholder="Digite o código" value="{{ code or '' }}" maxlength="30" required>
+      </label>
+      {% if error %}<p class="feedback err">{{ error }}</p>{% endif %}
+      <button class="btn shine" type="submit">Abrir convite 💌</button>
+    </form>
+    <p class="small-note">Feito com muito carinho 💚</p>
+  </div>
+</main>
+<script src="{{ url_for('static', filename='petals.js') }}"></script>
+</body>
+</html>
